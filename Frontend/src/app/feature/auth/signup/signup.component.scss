@@ -1,0 +1,426 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+// Variables
+$primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+$secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+$accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+$success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+
+$text-primary: #1a202c;
+$text-secondary: #4a5568;
+$text-muted: #718096;
+$background: #f7fafc;
+$white: #ffffff;
+$border-color: #e2e8f0;
+$error-color: #e53e3e;
+
+$border-radius: 16px;
+$border-radius-small: 8px;
+$transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08);
+$shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.12);
+$shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.16);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin input-focus {
+  &:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+  }
+}
+
+@mixin button-hover {
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: $shadow-medium;
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+.signup-button {
+  width: 100%;
+  padding: 16px;
+  background: $primary-gradient;
+  color: white;
+  border: none;
+  border-radius: $border-radius-small;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+  @include flex-center;
+  gap: 8px;
+  
+  @include button-hover;
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+  
+  &.loading {
+    pointer-events: none;
+  }
+  
+  .loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+.signup-container {
+  min-height: 100vh;
+  @include flex-center;
+  padding: 20px;
+  background: $primary-gradient;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+// Background elements
+.background-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.floating-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  .shape {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+
+    &.shape-1 {
+      width: 80px;
+      height: 80px;
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    &.shape-2 {
+      width: 120px;
+      height: 120px;
+      top: 20%;
+      right: 15%;
+      animation-delay: 2s;
+    }
+
+    &.shape-3 {
+      width: 60px;
+      height: 60px;
+      bottom: 30%;
+      left: 8%;
+      animation-delay: 4s;
+    }
+
+    &.shape-4 {
+      width: 100px;
+      height: 100px;
+      bottom: 10%;
+      right: 20%;
+      animation-delay: 1s;
+    }
+
+    &.shape-5 {
+      width: 40px;
+      height: 40px;
+      top: 50%;
+      left: 5%;
+      animation-delay: 3s;
+    }
+  }
+}
+
+.gradient-orbs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.4;
+    animation: pulse 8s ease-in-out infinite;
+
+    &.orb-1 {
+      width: 300px;
+      height: 300px;
+      background: $secondary-gradient;
+      top: -150px;
+      right: -150px;
+      animation-delay: 0s;
+    }
+
+    &.orb-2 {
+      width: 250px;
+      height: 250px;
+      background: $accent-gradient;
+      bottom: -125px;
+      left: -125px;
+      animation-delay: 2s;
+    }
+
+    &.orb-3 {
+      width: 200px;
+      height: 200px;
+      background: $success-gradient;
+      top: 50%;
+      right: -100px;
+      animation-delay: 4s;
+    }
+  }
+}
+
+.signup-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: $border-radius * 1.5;
+  padding: 48px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: $shadow-strong;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  animation: slideUp 0.8s ease-out;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.5), transparent);
+  }
+}
+
+// Header section
+.card-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.logo-section {
+  @include flex-center;
+  gap: 12px;
+  margin-bottom: 24px;
+
+  .logo-icon {
+    width: 48px;
+    height: 48px;
+    background: $primary-gradient;
+    border-radius: 12px;
+    @include flex-center;
+    color: white;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .brand-name {
+    font-size: 28px;
+    font-weight: 800;
+    background: $primary-gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+  }
+}
+
+.signup-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: $text-primary;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.signup-subtitle {
+  font-size: 16px;
+  color: $text-secondary;
+  margin: 0;
+  font-weight: 400;
+}
+
+// Form
+.signup-form {
+  .form-group {
+    margin-bottom: 24px;
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: 8px;
+      font-size: 14px;
+      letter-spacing: 0.025em;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      .input-icon {
+        position: absolute;
+        left: 16px;
+        z-index: 2;
+        color: $text-muted;
+        transition: $transition;
+
+        svg {
+          width: 20px;
+          height: 20px;
+          stroke-width: 1.5;
+        }
+      }
+
+      &:focus-within .input-icon {
+        color: #667eea;
+      }
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 16px 16px 16px 52px;
+      border: 2px solid $border-color;
+      border-radius: $border-radius-small;
+      font-size: 16px;
+      font-weight: 400;
+      background: rgba(248, 250, 252, 0.8);
+      transition: $transition;
+
+      @include input-focus;
+
+      &::placeholder {
+        color: $text-muted;
+        font-weight: 400;
+      }
+
+      &:hover {
+        border-color: #cbd5e0;
+      }
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 16px;
+      background: none;
+      border: none;
+      color: $text-muted;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: $transition;
+
+      &:hover {
+        color: $text-secondary;
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+        stroke-width: 1.5;
+      }
+    }
+
+    .error-message {
+      color: $error-color;
+      font-size: 14px;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+  }
+}
+
+// Sign-up button
+.signup-button {
+  width: 100%;
+  padding: 16px;
+  background: $primary-gradient;
+  color: white;
+  border: none;
+  border-radius: $border-radius-small;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+  @include flex-center;
+  gap: 8px;
+
+  @include button-hover;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  &.loading {
+    pointer-events: none;
+  }
+
+  .loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+// Sign-in link (bottom of form)
+.signin-link {
+  text-align: center;
+  color: $text-secondary;
+  font-size: 14px;
+
+  a {
+    color: #667eea;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

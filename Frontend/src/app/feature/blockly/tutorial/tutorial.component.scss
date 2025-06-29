@@ -1,0 +1,67 @@
+.tutorial-container {
+  max-width: 960px;
+  margin: 0.3rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f0f9ff, #ffffff);
+  border-radius: 1.5rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+  transition: all 0.3s ease-in-out;
+
+  .title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: #475569;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+
+    .step {
+      background: #ffffffcc;
+      backdrop-filter: blur(4px);
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+      }
+
+      .icon {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+        color: #2563eb;
+      }
+
+      h3 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 0.4rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: #475569;
+        line-height: 1.5;
+      }
+    }
+  }
+}

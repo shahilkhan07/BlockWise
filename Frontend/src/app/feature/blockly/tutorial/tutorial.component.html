@@ -1,0 +1,12 @@
+<div class="tutorial-container">
+  <h2 class="title">🚀 Getting Started with BlockWise</h2>
+  <p class="subtitle">Follow these simple steps to build your first logic visually and interactively.</p>
+
+  <div class="steps">
+    <div class="step" *ngFor="let step of steps">
+      <div class="icon">{{ step.icon }}</div>
+      <h3>{{ step.title }}</h3>
+      <p>{{ step.description }}</p>
+    </div>
+  </div>
+</div>

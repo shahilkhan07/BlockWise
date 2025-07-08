@@ -35,7 +35,7 @@ export class SigninComponent {
       next: (res) => {
         this.isLoading = false;
         this.authService.setToken(res.token);
-        this.router.navigate(['/']);
+        this.router.navigate(['/blockwise']);
       },
       error: (err) => {
         this.isLoading = false;

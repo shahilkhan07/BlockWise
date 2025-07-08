@@ -7,14 +7,15 @@ import { HttpClientModule } from '@angular/common/http';
 import 'blockly/javascript_compressed.js';
 import { javascriptGenerator } from 'blockly/javascript';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   standalone: true,
   selector: 'app-blockly-editor',
-  imports: [CommonModule, FormsModule, HttpClientModule,RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './blockly-editor.component.html',
-  styleUrls: ['./blockly-editor.component.scss'],
-  providers: [BlocklyService]
+  styleUrls: ['./blockly-editor.component.scss']
 })
 export class BlocklyEditorComponent implements OnInit {
   @ViewChild('blocklyDiv', { static: true }) blocklyDiv!: ElementRef;
@@ -52,11 +53,19 @@ export class BlocklyEditorComponent implements OnInit {
   activeTab: 'code' | 'output' = 'code';
   statusMessage: string = 'Ready to generate blocks';
   isLoading: boolean = false;
+  isLoggedIn: boolean = false;
+  private authSubscription!: Subscription;
 
-  constructor(private blocklyService: BlocklyService) {}
+  constructor(private blocklyService: BlocklyService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
-    // Define a custom block
+
+    this.authSubscription = this.authService.loggedIn$.subscribe((status) => {
+      this.isLoggedIn = status;
+    });
+
     Blockly.Blocks['say_hello'] = {
       init: function () {
         this.appendDummyInput().appendField("Say Hello");
@@ -72,7 +81,6 @@ export class BlocklyEditorComponent implements OnInit {
       return 'console.log("Hello from custom block!");\n';
     };
 
-    // Patch for text_print
     javascriptGenerator.forBlock['text_print'] = function (block: any, generator: any) {
       const msg = generator.valueToCode(block, 'TEXT', javascriptGenerator.ORDER_NONE) || "''";
       return `console.log(${msg});\n`;

@@ -23,9 +23,13 @@
             </div>
 
             <!-- Auth Buttons -->
-            <div class="auth-buttons">
+            <div *ngIf="!isLoggedIn" class="auth-buttons">
                 <button class="btn btn-outline" (click)="onLogin()">Login</button>
                 <button class="btn btn-primary" (click)="onRegister()">Register</button>
+            </div>
+
+            <div *ngIf="isLoggedIn" class="auth-buttons">
+                <button class="btn btn-outline" (click)="onLogout()">Logout</button>
             </div>
 
             <!-- Mobile Menu Toggle -->
@@ -45,9 +49,12 @@
             <a href="#" class="mobile-nav-link" (click)="closeMobileMenu()">About</a>
             <a href="#" class="mobile-nav-link" (click)="closeMobileMenu()">Contact</a>
         </div>
-        <div class="mobile-auth-buttons">
+        <div *ngIf="!isLoggedIn" class="mobile-auth-buttons">
             <button class="btn btn-outline" (click)="onLogin()">Login</button>
             <button class="btn btn-primary" (click)="onRegister()">Register</button>
+        </div>
+        <div *ngIf="isLoggedIn" class="mobile-auth-buttons">
+            <button class="btn btn-outline" (click)="onLogout()">Logout</button>
         </div>
     </div>
 </nav>

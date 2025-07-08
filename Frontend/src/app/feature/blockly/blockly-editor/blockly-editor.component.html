@@ -1,5 +1,4 @@
 <div class="container">
-  <!-- Floating Particles Background -->
   <div class="floating-particles">
     <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
     <div class="particle" style="left: 20%; animation-delay: 1s;"></div>
@@ -12,19 +11,16 @@
     <div class="particle" style="left: 90%; animation-delay: 2.5s;"></div>
   </div>
 
-  <!-- Header -->
   <div class="header">
     <p>Transform your ideas into visual code blocks with AI-powered assistance</p>
-    <!-- Sign-In Reminder Banner -->
   </div>
-  <div class="signin-reminder">
+  <div *ngIf="!isLoggedIn" class="signin-reminder">
     <p>
       🔐 <span>Sign in</span> to track your daily challenges and progress.
       <a routerLink="/auth/sign-in" class="signin-link">Sign in now →</a>
     </p>
   </div>
 
-  <!-- Daily Challenge Section (Floating Widget Style) -->
   <div class="daily-challenge-widget">
     <button class="challenge-btn" (click)="startChallenge()">
       {{ currentChallenge ? 'Close' : '🎯 Challenge Yourself' }}
@@ -48,12 +44,9 @@
     </div>
   </div>
 
-  <!-- Main Content Grid -->
   <div class="main-content">
 
-    <!-- Left Panel -->
     <div class="left-panel">
-      <!-- Input Section -->
       <div class="input-section">
         <div class="section-title">
           <div class="icon">💡</div>
@@ -69,7 +62,6 @@
         </button>
       </div>
 
-      <!-- Output Section -->
       <div class="output-section">
         <div class="section-title">
           <div class="icon">⚡</div>
@@ -85,7 +77,6 @@
           <div class="tab" [class.active]="activeTab === 'output'" (click)="activeTab = 'output'">Console Output</div>
         </div>
 
-        <!-- Tabs Content -->
         <div *ngIf="activeTab === 'code'">
           <div class="code-block">{{ generatedCode || '// Generated JavaScript code will appear here' }}</div>
         </div>
@@ -96,7 +87,6 @@
       </div>
     </div>
 
-    <!-- Right Panel (Blockly) -->
     <div class="right-panel">
       <div class="section-title">
         <div class="icon">🔧</div>

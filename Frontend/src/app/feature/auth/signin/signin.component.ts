@@ -10,8 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
   templateUrl: './signin.component.html',
   standalone: true,
   styleUrl: './signin.component.scss',
-  imports: [CommonModule, FormsModule,HttpClientModule],
-  providers:[AuthService]
+  imports: [CommonModule, FormsModule]
 })
 export class SigninComponent {
   email = '';
@@ -35,9 +34,8 @@ export class SigninComponent {
     this.authService.signIn(payload).subscribe({
       next: (res) => {
         this.isLoading = false;
-        // console.log('Sign-in successful:', res);
-        // TODO: Store token, handle user info, etc.
-        this.router.navigate(['/blockly']); // Or wherever you want to redirect
+        this.authService.setToken(res.token);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         this.isLoading = false;
@@ -49,16 +47,6 @@ export class SigninComponent {
 
   togglePassword(): void {
     this.showPassword = !this.showPassword;
-  }
-
-  signInWithGoogle(): void {
-    console.log('Google Sign-In clicked');
-    // TODO: Integrate Google Sign-In
-  }
-
-  signInWithGithub(): void {
-    console.log('GitHub Sign-In clicked');
-    // TODO: Integrate GitHub Sign-In
   }
 
   navigateToSignup(): void {

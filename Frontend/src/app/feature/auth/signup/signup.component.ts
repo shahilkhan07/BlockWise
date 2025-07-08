@@ -51,7 +51,6 @@ export class SignupComponent {
     this.authService.signUp(payload).subscribe({
       next: () => {
         this.isLoading = false;
-        alert('Signup successful!');
         this.navigateToSignin();
       },
       error: (err) => {
